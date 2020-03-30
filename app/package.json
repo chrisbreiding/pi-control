@@ -1,0 +1,23 @@
+{
+  "name": "pi-control",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint *.js",
+    "lint-fix": "npm run lint -- --fix",
+    "dev": "nodemon ./index.js",
+    "start": "node ./index.js"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-plugin-crb": "^1.0.0",
+    "nodemon": "^2.0.2"
+  },
+  "dependencies": {
+    "execa": "^4.0.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^4.0.0"
+  }
+}

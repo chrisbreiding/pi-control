@@ -1,0 +1,35 @@
+<div class="container control">
+  <p class='options'>
+    <button id="reboot">Reboot</button>
+    <button id="shutdown">Shut Down</button>
+    <button id="restart-camera">Restart Camera</button>
+  </p>
+  <p id="result" class='result'></p>
+  <pre id="error" class='error'></pre>
+</div>
+
+<script>
+  (function () {
+    const attachCommand = (id, message) => {
+      document.getElementById(id).addEventListener('click', () => {
+        if (confirm(`${message}?`)) {
+          fetch(`/${id}`, { method: 'POST' })
+          .then((response) => response.json())
+          .then(({ ok, error }) => {
+            let resultText = ok ? `${message} succeeded` : `${message} failed`
+
+            document.getElementById('result').innerText = resultText
+
+            if (error) {
+              document.getElementById('error').innerText = error
+            }
+          })
+        }
+      })
+    }
+
+    attachCommand('reboot', 'Reboot')
+    attachCommand('shutdown', 'Shut down')
+    attachCommand('restart-camera', 'Restart camera')
+  }())
+</script>
