@@ -1,9 +1,13 @@
-const execa = require('execa')
 const express = require('express')
 const handlebars = require('express-handlebars')
+const sudo = require('sudo-js')
 const config = require('../config')
 
 const app = express()
+
+if (config.password) {
+  sudo.setPassword(config.password)
+}
 
 app.engine('handlebars', handlebars())
 app.set('view engine', 'handlebars')
@@ -21,17 +25,17 @@ app.get('/control', (req, res) => {
   res.render('control', { title: `${config.title} | Control` })
 })
 
-const handleCommand = (command, ...args) => (req, res) => {
-  if (!config.installed) {
+const handleCommand = (...args) => (req, res) => {
+  if (!config.password) {
     return res.json({ ok: false })
   }
 
-  execa(command, ...args, { stdio: 'inherit' })
-  .then(() => {
-    res.json({ ok: true })
-  })
-  .catch((error) => {
-    res.json({ ok: false, error: (error || {}).stack })
+  sudo.exec(args, function (error) {
+    if (!error) {
+      return res.json({ ok: true })
+    }
+
+    res.json({ ok: false, error: error.stack || error.message })
   })
 }
 

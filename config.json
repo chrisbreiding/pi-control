@@ -1,6 +1,5 @@
 {
   "title": "My Website",
   "port": 3000,
-  "camUrl": "http://localhost:8081",
-  "installed": false
+  "camUrl": "http://localhost:8081"
 }
