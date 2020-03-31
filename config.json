@@ -1,6 +1,6 @@
 {
   "title": "My Website",
   "port": 3000,
-  "camUrl": "http://printercam.local:8081",
+  "camUrl": "http://localhost:8081",
   "installed": false
 }
