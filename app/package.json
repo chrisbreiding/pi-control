@@ -18,6 +18,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "express-handlebars": "^4.0.0",
+    "request": "^2.88.2",
     "sudo-js": "^1.0.2"
   }
 }

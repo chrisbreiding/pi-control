@@ -35,10 +35,6 @@ button:active {
   top: 0;
 }
 
-.index {
-  background: #222;
-}
-
 .control {
   flex-direction: column;
 }

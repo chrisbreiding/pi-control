@@ -1,6 +1,8 @@
 const express = require('express')
 const handlebars = require('express-handlebars')
+const request = require('request')
 const sudo = require('sudo-js')
+
 const config = require('../config')
 
 const app = express()
@@ -15,10 +17,7 @@ app.use(express.static(`${__dirname}/../public`))
 app.use(express.static(`${__dirname}/public`))
 
 app.get('/', (req, res) => {
-  res.render('index', {
-    title: config.title,
-    camUrl: config.camUrl,
-  })
+  req.pipe(request(config.camUrl)).pipe(res)
 })
 
 app.get('/control', (req, res) => {
